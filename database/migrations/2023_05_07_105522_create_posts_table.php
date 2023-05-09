@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title_ar');
             $table->string('title_eng');
             $table->string('slug');
-            $table->string('body_ar');
-            $table->string('body_eng');
+            $table->text('body_ar');
+            $table->text('body_eng');
             $table->boolean('premium')->default(0);
             $table->boolean('published')->default(1);
             $table->string('photo');
