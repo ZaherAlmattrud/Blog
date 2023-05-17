@@ -12,11 +12,13 @@ class HomeController extends Controller
     public function index()
     {
 
+
+
+        $posts = Post::published()->sample()->latest()->paginate(10);
+
         $postsPremium = Post::published()->premium()->latest()->get();
 
-        $posts = Post::published()->sample()->latest()->get();
 
-
-        return view('home')->with(['posts' => $postsPremium, 'postsPremium' => $postsPremium]);
+        return view('home')->with(['posts' => $posts, 'postsPremium' => $postsPremium]);
     }
 }

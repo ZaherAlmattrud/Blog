@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController ;
@@ -15,9 +16,12 @@ use App\Http\Controllers\PostController ;
 |
 */
 
-Route::middleware([/*'auth' ,  'verified'*/])->get('/', function () {
-    return view('home');
-});
+// Route::middleware([/*'auth' ,  'verified'*/])->get('/', function () {
+//     return view('home');
+// });
+
+
+Route::get('/',[HomeController::class , 'index']);
 
 
 Route::resource('posts' , PostController::class);

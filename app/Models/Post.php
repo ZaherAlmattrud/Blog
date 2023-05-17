@@ -25,19 +25,19 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function published($query)
+    public function scopePublished($query)
     {
 
         return $query->where('published', 1);
     }
 
-    public function premium($query)
+    public function scopePremium($query)
     {
 
         return $query->where('premium', 1);
     }
 
-    public function sample($query)
+    public function scopeSample($query)
     {
 
         return $query->where('premium', 0);
