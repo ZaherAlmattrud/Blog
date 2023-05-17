@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PostController ;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth' , 'verified'])->get('/', function () {
+Route::middleware([/*'auth' ,  'verified'*/])->get('/', function () {
     return view('home');
 });
+
+
+Route::resource('posts' , PostController::class);
