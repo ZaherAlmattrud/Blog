@@ -63,7 +63,7 @@
                 <div class="card footer bg-white">
 
                     <div class="d-flex justify-content-center">
-                               {{$posts->links()}}
+                        {{ $posts->links() }}
                     </div>
                 </div>
 
@@ -71,7 +71,18 @@
         </div>
         <div class="col-md-4">
 
-            all Categoryies
+            <ul class="list-group">
+
+                @foreach ($categories as $category)
+                    <li class="list-group-item">
+
+                        <span>
+                            {{$category->name_eng}}
+                        </span>
+                    </li>
+                @endforeach
+
+            </ul>
         </div>
 
 
