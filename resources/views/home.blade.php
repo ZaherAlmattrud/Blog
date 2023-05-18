@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('title')
-    Home
+    @if ( $category )
+        {{ ucfirst($category->name_eng) }} posts
+    @else
+        Home
+    @endif
 @endsection
 @section('content')
     <div class="row my-5">
@@ -72,12 +76,15 @@
         <div class="col-md-4">
 
             <ul class="list-group">
-
                 @foreach ($categories as $category)
-                    <li class="list-group-item">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                        <span>
-                            {{$category->name_eng}}
+                        <a href="{{ route('category.posts', $category) }}"
+                            class="btn btn-link text-decoration-none text-dark">
+                            {{ $category->name_eng }}
+                        </a>
+                        <span class="badge bg-primary rounded-pill">
+                            {{ $category->posts()->count() }}
                         </span>
                     </li>
                 @endforeach

@@ -29,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::useBootstrapFive();
 
-        View::share('categories' , Category::has('posts'))->get();
+        // View::share('categories' , Category::has('posts'))->get();
     }
 }

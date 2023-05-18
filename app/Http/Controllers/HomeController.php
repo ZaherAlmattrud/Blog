@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,19 @@ class HomeController extends Controller
 
         $postsPremium = Post::published()->premium()->latest()->get();
 
+        $categories = Category::has('posts')->get();
 
-        return view('home')->with(['posts' => $posts, 'postsPremium' => $postsPremium]);
+        return view('home')->with(['posts' => $posts, 'postsPremium' => $postsPremium, 'categories' => $categories, 'category' => null]);
+    }
+
+    public function postsByCategory(Category $category)
+    {
+
+
+        return view('home')->with([
+            'posts' => $category->posts()->paginate(10),
+            'category' => $category,
+            'categories' => Category::has('posts')->get()
+        ]);
     }
 }

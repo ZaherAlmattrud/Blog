@@ -3,7 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PostController ;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,10 @@ use App\Http\Controllers\PostController ;
 // });
 
 
-Route::get('/',[HomeController::class , 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('category/{category}/posts', [HomeController::class, 'postsByCategory'])
+    ->name('category.posts');
 
 
-Route::resource('posts' , PostController::class);
+Route::resource('posts', PostController::class);

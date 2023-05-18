@@ -10,11 +10,21 @@ class Category extends Model
     use HasFactory;
 
 
-
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'categories';
 
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
