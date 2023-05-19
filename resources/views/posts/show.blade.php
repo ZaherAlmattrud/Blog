@@ -46,6 +46,27 @@
                                         <p class="card-text">
                                             {{  $post->body_eng }}
                                         </p>
+
+                                        <div class="row my-2">
+
+                                                 <div class="col-md-6">
+                                                    @isset($previous)
+                                                    <a href="{{route('posts.show',$previous)}}" class="btn btn-link">
+                                                        <div>Previous</div>
+                                                        {{$previous->title_eng}}
+                                                    </a>
+                                                    @endisset
+                                                 </div>
+
+                                                 <div class="col-md-6">
+                                                    @isset($next)
+                                                    <a href="{{route('posts.show',$next)}}" class="btn btn-link">
+                                                        <div>Next</div>
+                                                        {{$next->title_eng}}
+                                                    </a>
+                                                    @endisset
+                                                 </div>
+                                        </div>
  
                                     </div>
                                 </div>

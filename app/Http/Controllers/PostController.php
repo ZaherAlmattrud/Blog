@@ -42,7 +42,13 @@ class PostController extends Controller
 
         $categories = Category::has('posts')->get();
 
-        return view('posts.show')->with(['post'=>$post , 'categories'=>$categories]);
+        $next = Post::where('id','>',$post->id)->orderBy('id')->first();
+        $previous= Post::where('id','<',$post->id)->orderBy('id','desc')->first();
+        return view('posts.show')->with([
+            'post'=>$post , 
+            'categories'=>$categories ,
+             'next'=> $next , 
+            'previous'=>$previous]);
     }
 
     /**
