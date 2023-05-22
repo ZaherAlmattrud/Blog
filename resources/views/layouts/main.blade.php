@@ -16,7 +16,7 @@
 
 <body class="bg-light">
 
-    <div class="container">
+    <div class="container" id="app">
 
         @include("layouts.navbar")
         @yield('content')
@@ -29,6 +29,7 @@
     <script src="{{ asset('assets/bootstrap_v_5_2_3/main.js') }}"
        crossorigin="anonymous">
     </script>
+     @vite('resources/js/app.js')
 </body>
 
 </html>

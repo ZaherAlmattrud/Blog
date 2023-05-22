@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('title')
-     
-        {{ ucfirst($post->title_eng) }} 
-  
-    
+
+        {{ ucfirst($post->title_eng) }}
+
+
 @endsection
 @section('content')
     <div class="row my-5">
@@ -14,7 +14,7 @@
 
                 <div class="row">
 
-               
+
                             <div class="col-md-14 mb-2">
 
                                 <div class="card h-100">
@@ -37,7 +37,7 @@
                                     <i class="fas fa-tag me-1"></i>
                                     {{$post->category->name_eng}}
                                     </span>
-                                       
+
                                     </div>
                                         <div class="card-title fw-bold">
                                             {{ $post->title_eng }}
@@ -67,16 +67,17 @@
                                                     @endisset
                                                  </div>
                                         </div>
- 
+
                                     </div>
                                 </div>
+                               <app-component></app-component>
                             </div>
-              
+
 
                 </div>
-           
 
-               
+
+
 
             </div>
         </div>
@@ -99,7 +100,7 @@
 
 </ul>
 </div>
-        
+
     </div>
 
 
