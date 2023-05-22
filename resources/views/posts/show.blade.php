@@ -70,7 +70,7 @@
 
                                     </div>
                                 </div>
-                               <app-component></app-component>
+                               <comments-component></comments-component>
                             </div>
 
 

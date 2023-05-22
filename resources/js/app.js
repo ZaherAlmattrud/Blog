@@ -1,9 +1,9 @@
 import './bootstrap';
 
 import {createApp} from 'vue/dist/vue.esm-bundler.js'
-import  App  from './components/App.vue'
+import  Comments  from './components/Comments.vue'
 
 const app  = createApp({});
 
-app.component("app-component" , App);
+app.component("comments-component" , Comments);
 app.mount('#app');
