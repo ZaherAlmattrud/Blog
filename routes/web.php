@@ -26,5 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('category/{category}/posts', [HomeController::class, 'postsByCategory'])
     ->name('category.posts');
 
+Route::get('changeLanguage/{lang}',[HomeController::class , 'changeLanguage'])
+    ->name('language.change');
+
 
 Route::resource('posts', PostController::class);
