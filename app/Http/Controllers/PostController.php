@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -37,7 +38,17 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+    
+
+        $categories = Category::has('posts')->get();
+
+        $next = Post::where('id','>',$post->id)->orderBy('id')->first();
+        $previous= Post::where('id','<',$post->id)->orderBy('id','desc')->first();
+        return view('posts.show')->with([
+            'post'=>$post , 
+            'categories'=>$categories ,
+             'next'=> $next , 
+            'previous'=>$previous]);
     }
 
     /**

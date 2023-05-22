@@ -34,4 +34,12 @@ class HomeController extends Controller
             'categories' => Category::has('posts')->get()
         ]);
     }
+
+    public function changeLanguage($lang){
+
+        session()->forget('lang');
+        session()->set('lang' , $lang);
+        return redirect()->back();
+
+    }
 }
