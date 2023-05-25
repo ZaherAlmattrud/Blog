@@ -67,10 +67,11 @@
                                                     @endisset
                                                  </div>
                                         </div>
-
+                                        <hr>
+                                        <comments-component></comments-component>
                                     </div>
                                 </div>
-                               <comments-component></comments-component>
+
                             </div>
 
 
