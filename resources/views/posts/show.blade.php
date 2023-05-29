@@ -67,8 +67,15 @@
                                 <comments-count-component></comments-count-component>
                                 <hr class="m-3">
                                 <comments-component></comments-component>
+
+                                @auth
                                 <hr class="m-3">
-                                <add-comment-component></add-comment-component>
+                                <add-comment-component
+                                :user-id="{{auth()->user()->id}}"
+                                :post-id="{{$post->id}}"
+
+                                ></add-comment-component>
+                                @endauth
                             </div>
                         </div>
 
