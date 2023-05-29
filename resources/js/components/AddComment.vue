@@ -42,6 +42,7 @@ const addComment = async ()=>{
            });
 
            console.log(respone.data);
+           data.body = '';
 
     }catch( error ){
         console.log(error);
