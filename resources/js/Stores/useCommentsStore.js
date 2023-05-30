@@ -15,7 +15,17 @@ export const useCommentsStore = defineStore('comments', {
   },
   actions:{
 
+    async fetchComments(post_id){
 
+         try{
+
+             const response = await axios.get('/api/comments/${post_id}');
+             this.comments = response.data ;
+             
+         }catch(error){
+             console.log(error)
+         }
+    },
     async storeComment( user_id ,  post_id ,  body) {
 
         console.log( "fffffffffff")
