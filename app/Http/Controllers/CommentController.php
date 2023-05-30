@@ -20,7 +20,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
 
-        $comment = Comment::created([
+        $comment = Comment::create([
 
             'body' => $request->body,
             'user_id' => $request->user_id,

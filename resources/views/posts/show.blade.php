@@ -71,8 +71,8 @@
                                 @auth
                                 <hr class="m-3">
                                 <add-comment-component
-                                :user-id="{{auth()->user()->id}}"
-                                :post-id="{{$post->id}}"
+                                :user_id="{{auth()->user()->id}}"
+                                :post_id="{{$post->id}}"
 
                                 ></add-comment-component>
                                 @endauth
