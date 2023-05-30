@@ -12,6 +12,7 @@
 <script setup>
 
 import {reactive} from 'vue';
+import {useCommentsStore} from '@/Stores/useCommentsStore.js';
 
 const props = defineProps({
  user_id : {
@@ -26,6 +27,8 @@ const props = defineProps({
 
 });
 
+const store = useCommentsStore();
+
 const data = reactive({
    body:''
 
@@ -33,20 +36,11 @@ const data = reactive({
 
 const addComment = async ()=>{
 
-    try{
-           const respone = await axios.post('/api/add/comment',{
+    console.log(data.body)
+store.storeComment(props.user_id ,  props.post_id , data.body )
 
-            user_id : props.user_id,
-            post_id : props.post_id,
-            body : data.body
-           });
 
-           console.log(respone.data);
-           data.body = '';
-
-    }catch( error ){
-        console.log(error);
-    }
+data.body = '';
 
 };
 
