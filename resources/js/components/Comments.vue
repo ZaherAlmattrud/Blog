@@ -1,7 +1,7 @@
  <template>
 
     <div class="d-flex-column">
-        <div class="flex" v-for="comment in store.getComments" :key="comment.id">
+        <div class="flex" v-for="comment in store.getComments.slice(0, data.commentToShow)" :key="comment.id">
             <div class="flex-shrink-0">
                 <span class="fw-bold">
                    {{ comment.user.name }}
@@ -16,14 +16,23 @@
                 </p>
             </div>
         </div>
+        <button v-if="data.commentToShow < store.getComments.length"
+        @click="loadMoreComments"
+        class="btn btn-sm btn-link">
+        Load more
+    </button>
     </div>
 
  </template>
 <script setup>
 
 import {useCommentsStore} from '@/Stores/useCommentsStore.js';
-import { onMounted } from 'vue';
+import { onMounted  , reactive} from 'vue';
 const store = useCommentsStore();
+
+const data = reactive({
+        commentToShow: 3
+    });
 
 const props = defineProps({
         post_id: {
@@ -33,6 +42,14 @@ const props = defineProps({
     });
 
 onMounted(() => store.fetchComments(props.post_id));
+
+const loadMoreComments = () => {
+        if(data.commentToShow >= store.getComments.length){
+            return;
+        }else{
+            data.commentToShow = data.commentToShow + 3;
+        }
+    }
 
 
 </script>
