@@ -1,18 +1,18 @@
  <template>
 
     <div class="d-flex-column">
-        <div class="flex">
+        <div class="flex" v-for="comment in store.getComments" :key="comment.id">
             <div class="flex-shrink-0">
                 <span class="fw-bold">
-                    comment
+                   {{ comment.user.name }}
                 </span>
             </div>
             <div class="flex-grow-1 ms-3">
                 <span class="text-muted">
-                   <i> 5 Hours ago</i>
+                   <i>   {{ comment.created_at}}</i>
                 </span>
                 <p>
-                    Lorem ipsum dolor sit amet.
+                    {{ comment.body}}
                 </p>
             </div>
         </div>
@@ -21,6 +21,18 @@
  </template>
 <script setup>
 
+import {useCommentsStore} from '@/Stores/useCommentsStore.js';
+import { onMounted } from 'vue';
+const store = useCommentsStore();
+
+const props = defineProps({
+        post_id: {
+            type: Number,
+            required: true
+        }
+    });
+
+onMounted(() => store.fetchComments(props.post_id));
 
 
 </script>

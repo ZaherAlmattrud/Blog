@@ -66,7 +66,7 @@
                                 </div>
                                 <comments-count-component></comments-count-component>
                                 <hr class="m-3">
-                                <comments-component></comments-component>
+                                <comments-component   :post_id="{{$post->id}}"></comments-component>
 
                                 @auth
                                 <hr class="m-3">
