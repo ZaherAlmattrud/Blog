@@ -73,25 +73,8 @@
 
             </div>
         </div>
-        <div class="col-md-4">
-
-            <ul class="list-group">
-                @foreach ($categories as $category)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-
-                        <a href="{{ route('category.posts', $category) }}"
-                            class="btn btn-link text-decoration-none text-dark">
-                            {{ $category->name_eng }}
-                        </a>
-                        <span class="badge bg-primary rounded-pill">
-                            {{ $category->posts()->count() }}
-                        </span>
-                    </li>
-                @endforeach
-
-            </ul>
-        </div>
-
+       
+        @include('layouts.sidebar')
 
     </div>
 @endsection
