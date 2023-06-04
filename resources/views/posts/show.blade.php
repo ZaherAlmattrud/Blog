@@ -64,18 +64,42 @@
                                         @endisset
                                     </div>
                                 </div>
+
+
                                 <comments-count-component></comments-count-component>
                                 <hr class="m-3">
-                                <comments-component   :post_id="{{$post->id}}"></comments-component>
+                                <comments-component :post_id="{{ $post->id }}"></comments-component>
 
                                 @auth
-                                <hr class="m-3">
-                                <add-comment-component
-                                :user_id="{{auth()->user()->id}}"
-                                :post_id="{{$post->id}}"
+                                    <hr class="m-3">
 
-                                ></add-comment-component>
+                                    @if (auth()->user()->hasVerifiedEmail())
+                                        <add-comment-component :user_id="{{ auth()->user()->id }}"
+                                            :post_id="{{ $post->id }}"></add-comment-component>
+                                    @else
+                                        @if (session('status')==='verification-link-sent')
+                                            <div class="alert alert-success" role="alert">
+                                                {{ __('A fresh verification link has been sent to your email address.') }}
+                                            </div>
+                                        @endif
+
+                                        {{ __('Before proceeding, please check your email for a verification link.') }}
+                                        {{ __('If you did not receive the email') }},
+                                        <form class="d-inline" method="POST" action="{{ route('verification.send') }}">
+                                            @csrf
+                                            <button type="submit"
+                                                class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                                        </form>
+                                    @endif
+
                                 @endauth
+                                @guest
+                                <div class="alert alert-info">
+                                    <a href="{{route('login')}}" class="btn btn-link text-decoration-none text-dark">
+                                        Log in to add your comment
+                                    </a>
+                                </div>
+                            @endguest
                             </div>
                         </div>
 
