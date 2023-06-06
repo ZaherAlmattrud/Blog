@@ -42,4 +42,13 @@ class HomeController extends Controller
         return redirect()->back();
 
     }
+
+
+    public function searchByTerm(Request $request){
+        $posts = Post::orderBy('created_at','desc')
+                    ->where('title_eng', 'like', '%'.$request->term.'%')
+                    ->orWhere('title_ar', 'like', '%'.$request->term.'%')
+                    ->published()->get();
+        return response()->json($posts);
+    }
 }

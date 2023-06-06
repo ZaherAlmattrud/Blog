@@ -7,9 +7,26 @@
   </div>
   <div class="offcanvas-body">
     <input type="text"
+            @change="getPostsByTerm"
             v-model="data.term"
             :placeholder="props.placeholder"
             class="form-control">
+
+            <div v-if="data.posts.length">
+            <ul class="list-group">
+                <li class="list-group-item" v-for="post in data.posts" :key="post.id">
+                    <a :href="`http://localhost:8000/posts/${post.slug}`">
+                        {{placeholder = post.title_ar  }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <ul class="list-group" v-if="data.message">
+            <li class="list-group-item">
+                {{data.message}}
+            </li>
+        </ul>
+
   </div>
 </div>
  </template>
@@ -29,6 +46,32 @@ const props = defineProps({
             required: true
         }
     });
+
+
+    const getPostsByTerm = async () => {
+        clearResults();
+        if(data.term.length >= 3){
+            try {
+                const response = await axios.post('/api/search',{
+                    term: data.term
+                });
+                if(response.data.length){
+                    data.posts = response.data;
+                }else{
+                    data.message = 'Nothing found!'
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+    const clearResults = () => {
+
+
+        data.posts = [];
+        data.message = '';
+    }
 
 
 

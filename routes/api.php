@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('add/comment',[CommentController::class, 'store']);
 Route::get('comments/{post_id}', [CommentController::class, 'getPostComments']);
+Route::post('search', [HomeController::class, 'searchByTerm']);
