@@ -18,7 +18,7 @@
 
     <div class="container"  >
 
-        @include("layouts.navbar")
+        @include("layouts.admin.navbar")
         @yield('content')
     </div>
 
@@ -29,7 +29,7 @@
     <script src="{{ asset('assets/bootstrap_v_5_2_3/main.js') }}"
        crossorigin="anonymous">
     </script>
-     
+
 </body>
 
 </html>

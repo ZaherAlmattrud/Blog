@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class AdminController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(10);
-        return view('admin.index')->with([
-            'posts' => $posts
+        $categories = Category::has('posts')->get();
+        return view('admin.dashboard')->with([
+            'posts' => $posts , 'categories' => $categories
         ]);
     }
 
