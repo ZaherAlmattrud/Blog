@@ -9,12 +9,23 @@ use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->except(['show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->paginate(10);
+        $categories = Category::has('posts')->get();
+
+        return view('admin.posts.index')->with([
+            'posts' => $posts , 'categories' => $categories
+        ]);
     }
 
     /**
@@ -38,17 +49,18 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-    
+
 
         $categories = Category::has('posts')->get();
 
-        $next = Post::where('id','>',$post->id)->orderBy('id')->first();
-        $previous= Post::where('id','<',$post->id)->orderBy('id','desc')->first();
+        $next = Post::where('id', '>', $post->id)->orderBy('id')->first();
+        $previous = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
         return view('posts.show')->with([
-            'post'=>$post , 
-            'categories'=>$categories ,
-             'next'=> $next , 
-            'previous'=>$previous]);
+            'post' => $post,
+            'categories' => $categories,
+            'next' => $next,
+            'previous' => $previous
+        ]);
     }
 
     /**

@@ -30,8 +30,8 @@ Route::get('category/{category}/posts', [HomeController::class, 'postsByCategory
 Route::get('changeLanguage/{lang}', [HomeController::class, 'changeLanguage'])
     ->name('language.change');
 
+    Route::resource('posts', PostController::class);
 
-Route::resource('posts', PostController::class);
 
 Route::prefix('admin')->group(function () {
 
@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware('admin')->group(function () {
 
         Route::get('dashboard', [AdminController::class, 'index'])->name('admin.index');
+
         Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 
