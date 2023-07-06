@@ -9,15 +9,15 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                   <div>
+                    <div>
                         <h4 class="card-title">
-                            <a href="{{route('posts.create')}}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('posts.create') }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </h4>
-                   </div>
-                   <hr>
-                   <table class="table table-hovered">
+                    </div>
+                    <hr>
+                    <table class="table table-hovered">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -35,15 +35,15 @@
                         <tbody>
                             @foreach ($posts as $key => $post)
                                 <tr>
-                                    <td>{{$key+=1}}</td>
+                                    <td>{{ $key += 1 }}</td>
                                     <td>
-                                        <a href="{{route('posts.show',$post)}}" target="_blank">
-                                            {{$post->title_eng}}
+                                        <a href="{{ route('posts.show', $post) }}" target="_blank">
+                                            {{ $post->title_eng }}
                                         </a>
                                     </td>
-                                    <td>{{$post->title_ar}}</td>
-                                    <td>{{$post->category->name_eng}}</td>
-                                    <td>{{$post->admin->name}}</td>
+                                    <td>{{ $post->title_ar }}</td>
+                                    <td>{{ $post->category->name_eng }}</td>
+                                    <td>{{ $post->admin->name }}</td>
                                     <td>
                                         @if ($post->premium)
                                             <a href="">
@@ -75,26 +75,26 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <img src="{{asset($post->photo)}}"
-                                            width="60"
-                                            height="60"
-                                            class="rounded"
-                                            alt="{{$post->title_en}}">
+                                        <img src="{{ asset($post->photo) }}" width="60" height="60" class="rounded"
+                                            alt="{{ $post->title_en }}">
                                     </td>
                                     <td>
-                                        {{$post->created_at->diffForHumans()}}
+                                        {{ $post->created_at->diffForHumans() }}
                                     </td>
                                     <td class="d-flex">
-                                        <a href="{{route('posts.edit',$post)}}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <button onclick="
+                                        <button
+                                            onclick="
                                                         if(confirm('are you sure ?'))
-                                                        document.getElementById({{$post->id}}).submit();
-                                                        " class="btn btn-sm btn-danger mx-2">
+                                                        document.getElementById({{ $post->id }}).submit();
+                                                        "
+                                            class="btn btn-sm btn-danger mx-2">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <form id="{{$post->id}}" action="{{route('posts.destroy',$post)}}" method="post">
+                                        <form id="{{ $post->id }}" action="{{ route('posts.destroy', $post) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -102,10 +102,10 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                   </table>
+                    </table>
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{$posts->links()}}
+                    {{ $posts->links() }}
                 </div>
             </div>
         </div>

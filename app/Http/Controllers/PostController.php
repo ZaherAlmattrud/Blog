@@ -6,8 +6,9 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Tag;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Str;
 class PostController extends Controller
 {
 
@@ -34,7 +35,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::has('posts')->get();
+
+        return view('admin.posts.create')->with([
+
+            'tags' => Tag::all(),
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -42,7 +49,20 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+       if($request->validated()){
+            $data = $request->except('_token');
+            $file = $request->file('photo');
+            $image_name = time().'_'.'photo'.'_'.$file->getClientOriginalName();
+            $file->move('uploads', $image_name);
+            $data['photo'] = 'uploads/'.$image_name;
+            $data['slug'] = Str::slug($request->title_en);
+            $data['admin_id'] = auth()->guard('admin')->user()->id;
+            $post = Post::create($data);
+            $post->tags()->sync($request->tags);
+            return redirect()->route('posts.index')->with([
+                'success' => 'Post added successfully'
+            ]);
+        }
     }
 
     /**
