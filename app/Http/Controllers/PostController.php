@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
         $categories = Category::has('posts')->get();
 
         return view('admin.posts.index')->with([
-            'posts' => $posts , 'categories' => $categories
+            'posts' => $posts, 'categories' => $categories
         ]);
     }
 
@@ -84,6 +85,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if (File::exists($post->photo)) {
+            File::delete($post->photo);
+        }
+        $post->delete();
+        return redirect()->route('posts.index')->with([
+            'success' => 'Post deleted successfully'
+        ]);
     }
 }
